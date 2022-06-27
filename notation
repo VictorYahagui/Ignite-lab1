@@ -1,0 +1,43 @@
+/*
+chamar api no apollo 1° modo:
+const GET_LESSONS_QUERY = gql`
+query {
+  lessons {
+    id
+    title
+  }
+}
+`
+
+useEffect(() => {
+    client.query({
+        query: GET_LESSONS_QUERY,
+    }).then(response => {
+        console.log(response.data)
+    })
+}, []);
+
+2° modo:
+
+import { gql, useQuery } from "@apollo/client";
+
+const GET_LESSONS_QUERY = gql `
+  query {
+    lessons {
+      id
+      title
+    }
+  }
+`
+interface Lesson {
+  id: string;
+  title: string;
+}
+
+  const { data } = useQuery<{lessons: Lesson[]}>(GET_LESSONS_QUERY);
+   <ul>
+      {data?.lessons.map(lesson => {
+        return <li key={lesson.id}>{lesson.title}</li>;
+      })}
+   </ul>
+*/
